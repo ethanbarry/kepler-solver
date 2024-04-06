@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "ephemeride"
+name = "kepler-solver"
 version = "0.1.0"
