@@ -1,23 +1,31 @@
 use std::io::{self, Write};
 
-fn main() {
-    // First, we need the orbital elements.
-    // Specifically, a, e, m_planet & m_star, the time of perihelion T,
-    // the gravitational constant G, aaaaand... that's it.
+const VERSION: &str = "v0.1.0";
 
+fn main() {
+    println!(
+        "kepler-solver {} - by Ethan Barry <ethan.barry@howdytx.technology>",
+        VERSION
+    );
+    println!("This program computes the eccentric anomaly from");
+    println!("the mean anomaly and the orbit's eccentricity.");
+    println!("----------");
+    // First we'll collect the two parameters we need...
+    // And yes, Rust's string I/O is gross.
     print!("Enter the planet's eccentricity (e): ");
     io::stdout().flush().expect("Flush failed.");
     let mut line = String::new();
     io::stdin().read_line(&mut line).expect("I/O Failed.");
     let e: f64 = line.trim().parse().expect("Invalid value.");
 
-    line.clear();
+    line.clear(); // Clear the string.
 
     print!("Enter the mean anomaly (M): ");
     io::stdout().flush().expect("Flush failed.");
     io::stdin().read_line(&mut line).expect("I/O Failed.");
     let mean_anomaly: f64 = line.trim().parse().expect("Invalid value.");
 
+    // ...then compute the actual value of E within the tolerance.
     let res = newton_raphson(e, mean_anomaly, 0_f64, 0.000001);
     println!("Eccentric anomaly: {res}");
 }
