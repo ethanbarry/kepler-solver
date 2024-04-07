@@ -30,4 +30,11 @@ $$f(E) = 0 = E - e\sin (E) - M$$
 
 and its derivative
 
-$$f'(E) = 1 - e\cos (E)$$
+$$f'(E) = 1 - e\cos (E).$$
+
+Newton-Raphson iteration lets us find solutions to things like
+$$\Phi (x) = 0$$
+or in other words, it's a root-finding algorithm. It works by
+choosing an initial guess for the solution, and then doing
+$$x_{n + 1} = x_n - \frac{\Phi (x)}{\Phi '(x)}$$
+and letting $x_n$ converge to the result.
