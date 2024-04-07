@@ -40,3 +40,20 @@ fn newton_raphson(e: f64, mean_anomaly: f64, initial_guess: f64, tolerance: f64)
     }
     guess
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::*;
+
+    #[test]
+    fn check_solution() {
+        //! Values from <http://www.csun.edu/~hcmth017/master/node16.html>
+        //! This just goes to show how precise we can get! Very cool, if you ask me!
+
+        let e = 0.00001;
+        let mean_anom = 0.5235988; // Roughly π/6.
+        let ans = newton_raphson(e, mean_anom, mean_anom, 0.000001);
+
+        assert!((ans - 0.5236038).abs() < 0.000001);
+    }
+}
